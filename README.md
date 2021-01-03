@@ -1,6 +1,9 @@
 <div>
   <h1>Java Command Line Manager</h1>
 </div>
+<p>
+<img src="https://img.shields.io/github/languages/top/Ahmed-Elawad/javaCommandLineManager" />  
+</p>
 
 ## Usage
 A command demo program for basic interactions with
@@ -31,9 +34,13 @@ Optional:
 ### Entry
 - Only two options available:
 - [ ] Create User
-- [ ] Exit
+- [ ] Exit<br /><br/>
 
 - Create a user entering a username and password
-
+<img src="https://github.com/Ahmed-Elawad/javaCommandLineManager/blob/master/Assets/EntrySteps.png" />
+<br /><br/>
 
 - Options are than given to manage a savings and checking balance with simple methods
+<br />
+<img src="https://github.com/Ahmed-Elawad/javaCommandLineManager/blob/master/Assets/optionsForAccounts.png" />
+<img src="https://github.com/Ahmed-Elawad/javaCommandLineManager/blob/master/Assets/accountMethods.png" />
