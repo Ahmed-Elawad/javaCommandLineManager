@@ -1,9 +1,7 @@
 <div>
   <h1>Java Command Line Manager</h1>
 </div>
-<p>
-<img src="https://img.shields.io/github/languages/top/Ahmed-Elawad/javaCommandLineManager" />  
-</p>
+
 
 ## Usage
 A command demo program for basic interactions with
