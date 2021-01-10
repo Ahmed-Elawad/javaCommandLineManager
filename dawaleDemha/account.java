@@ -8,10 +8,11 @@ class Account {
 
     private String name;
     private int balance = 0;
-    private Boolean balanceIsSet = false;
+    private boolean balanceIsSet = false;
     private static int numberofAccounts;
 
     public Account(String accountName) {
+
         this.name = accountName;
         numberofAccounts++;
     }

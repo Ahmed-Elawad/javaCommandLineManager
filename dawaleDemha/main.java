@@ -3,7 +3,6 @@ package dawaleDemha;
 import java.util.Scanner;
 
 public class main {
-    // prompt the user to create an account and navigate through some settings
 
     public static void main(String[] args) {
 
@@ -15,8 +14,7 @@ public class main {
                 exit = userInput.nextInt();
                 if (exit == 1) {
                     createUser(userInput);
-                }
-                if (exit == 2) {
+                } else if (exit == 2) {
                     System.out.println("Bye");
                     return;
                 }
@@ -26,16 +24,23 @@ public class main {
         }
     }
 
-    // enter an account and interface with the created accounts
     private static int createUser(Scanner inputProcessor) {
+        /**
+         * @Params {Scanner} (inputProcesserObj)
+         * Assign the username and password calling assignPassword() & assignUsername()
+         * Create a new Login instance using username and password and
+         * enter the interface to interact with each account
+         * @Returns {Int} once interface is exited return 1
+         * @implNote Cannot return to created instance once exited
+         */
 
-        String username = null;
-        String password = null;
+        String username;
+        String password;
         Login userAccount;
         int returnCode = 1;
 
-        username = assignusername(inputProcessor, username);
-        password = assignPassword(inputProcessor, password);
+        username = assignusername(inputProcessor);
+        password = assignPassword(inputProcessor);
         userAccount = new Login(username, password);
         while (true) {
             if (navigateAccount(userAccount, inputProcessor) == 1) break;
@@ -44,12 +49,19 @@ public class main {
         return returnCode;
     }
 
-    private static String assignPassword(Scanner inputProcessor, String password) {
+    private static String assignPassword(Scanner inputProcessor) {
+        /**
+         * @Params {Scanner, String) (inputProcessingObj, passwordRef)
+         * Provide the INT interface to input and assign the password
+         * @Returns {String} returns the assigned passsword String obj
+         * NOTE: Cannot exit interface once entered
+         */
+
         while (true) {
             System.out.println("Please enter your desired password:");
             inputProcessor.nextLine();
             if (inputProcessor.hasNextLine()) {
-                password = inputProcessor.nextLine();
+                String password = inputProcessor.nextLine();
                 System.out.format("You entered: %s\n", password);
                 System.out.println("Continue to create account?\n1 YES\n2 NO");
                 if (inputProcessor.nextInt() == 1) return password;
@@ -57,12 +69,19 @@ public class main {
         }
     }
 
-    private static String assignusername(Scanner inputProcessor, String username) {
+    private static String assignusername(Scanner inputProcessor) {
+        /**
+         * @Params {Scanner, String) (inputProcessingObj, usernameRef)
+         * Provide the INT interface to input and assign the username
+         * @Returns {String} returns the assigned username String obj
+         * NOTE: Cannot exit interface on request
+         */
+
         while (true) {
             System.out.println("Please entered the desired username:");
             inputProcessor.nextLine();
             if (inputProcessor.hasNextLine()) {
-                username = inputProcessor.nextLine();
+                String username = inputProcessor.nextLine();
                 System.out.format("You entered: %s\n", username);
                 System.out.println("Continue to password?\n1 YES\n2 NO");
                 if (inputProcessor.nextInt() == 1) return username;
@@ -71,9 +90,15 @@ public class main {
     }
 
     private static int navigateAccount(Login userAccount, Scanner inputScanner) {
-        int returnCode = 0;
-        Boolean accountsCreated = false;
-        while (!accountsCreated) {
+        /**
+         * @Params {Login, Scanner} (accountObj, inputProcessor)
+         * Provide the interface for a user to interact with the newly
+         * created account through INT inputs and navigation.
+         * @Returns {Int} 1 for succesful termination
+         * @Note: Once exited cannot return
+         */
+
+        while (true) {
             int exit;
             System.out.println("Need to create an account before moving on:\nCreating Checking");
             System.out.println("Please enter balance in checking:");
@@ -99,13 +124,18 @@ public class main {
             if (userNav == 0) break;
         }
 
-        returnCode = 1;
-        return returnCode;
+        return 1;
     }
 
     private static int openAccount(Scanner inputScanner, Login userAccount, String account) {
-        // provide options to update account balances
-        // return 1 always
+        /**
+         * @params {Scanner, String, String} (inputProcesser, userAccountObject, accountName)
+         * Provides an option menu to interact with the account obj:
+         * Debit: reduce the balance,
+         * Credit: Increase the balance,
+         * Return: returns to account selection menu
+         * @returns: 1 for successful exit
+         */
 
         int returnCode = 1;
         while (true) {
@@ -130,6 +160,7 @@ public class main {
                 break;
             }
         }
+
         return returnCode;
     }
 
