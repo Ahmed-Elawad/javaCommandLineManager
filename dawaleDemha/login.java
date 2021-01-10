@@ -13,69 +13,84 @@ class Login {
     }
 
     public String getUsername() {
-        // return the saved username
+        /**
+         * @Returns {String} Returns the saved username
+         */
 
         return this.username;
     }
 
     private Boolean validatePassword(String inputPassword) {
-        // validate the input password witht the saved password
-        // return true for success false for fail
+        /**
+         * @Params {String} (passwordToValidate)
+         * Confirm if the inputed password has the same length
+         * and charecters as the saved password
+         * @Returns {true} password match {false} password fail
+         */
 
         if (inputPassword.length() != this.password.length()) return false;
-        for (int i = 0; i < this.password.length(); i++) {
-            if (this.password.charAt(i) != inputPassword.charAt(i)) return false;
-        }
-        return true;
+        boolean correctPassword = this.password.equals(inputPassword);
+        return correctPassword;
     }
 
     private Boolean validateUsername(String username) {
-        // validate the input username with the saved username
-        // returns: false for fail, true for success
+        /**
+         * @Params {String} (usernameToValidate)
+         * Confirm if the inputed username matches the
+         * saved username by length and charecters
+         * @Returns {true} success {false} fail
+         */
 
         if (username.length() != this.username.length()) return false;
-        for (int i = 0; i < this.username.length(); i++) {
-            if (this.username.charAt(i) != username.charAt(i)) return false;
-        }
-        return true;
+        boolean correctUsername = this.username.equals(username);
+        return correctUsername;
     }
 
     public int login(String username, String password) {
-        // validate the username and password
-        // returns: 0 for success, 1 for wrong username, 2 for wrong password
+        /**
+         * @Params {String(username), String(Password)}
+         * Validate the inputed login credentials using the
+         * private validator methods
+         * @Returns {Int} 1: failed username, 2: failed Password, 0 success
+         */
 
-        int returnCode = 0;
         Boolean isCorrectUsername = validateUsername(username);
         Boolean isCorrectPass = validatePassword(password);
-        if (!isCorrectUsername) returnCode = 1;
-        if (!isCorrectPass) returnCode = 2;
-        return returnCode;
+        if (!isCorrectUsername) return 1;
+        if (!isCorrectPass) return 2;
+        return 0;
     }
 
     public int setUsername(String password, String username) {
-        // validate the password provided and reset the username if so
-        // returns 0 for success, 1 for fail
+        /**
+         * @Params {String(password), String(username)}
+         * Validate the provided password using the private
+         * validator and set the new username on success
+         * @Returns {int} 1: failed validation, 0: success
+         */
 
-        int returnCode = 1;
         Boolean isCorrectPass = validatePassword(password);
         if (isCorrectPass) {
             this.username = username;
-            returnCode = 0;
+            return 0;
         }
-        return returnCode;
+        return 1;
     }
 
     public int setPassword(String oldPassword, String newPassword) {
-        // validate the password
-        // returns 1 for fail, 0 for success
+        /**
+         * @Params {String(oldPass), String(newPass)}
+         * Validate the password using private methods and
+         * update the password on success
+         * @Returns {int} 1: failed validation, 0: successful assignment
+         */
 
-        int returnCode = 1;
         Boolean isCorrectPassword = validatePassword(oldPassword);
         if (isCorrectPassword) {
             this.password = newPassword;
-            returnCode = 0;
+            return 0;
         }
-        return returnCode;
+        return 1;
     }
 
     public int numberOfAccounts() {
@@ -83,69 +98,95 @@ class Login {
     }
 
     public int createAccount(String name) {
-        // create a new account at the most recent availible index
+        /**
+         * @Params {String(name)}
+         * Creates a new account on the Login obj
+         * assigning the account name to the passed in name
+         * only if there are less than 3 accounts created.
+         * 2 is the max.
+         * @Returns {int} 1: failed creation. No message.
+         * 0: for successful creation.
+         */
 
-        int returnCode = 1;
         if (this.lastCreatedAccountIndex <= 1) {
             accounts[this.lastCreatedAccountIndex] = new Account(name);
             this.lastCreatedAccountIndex++;
-            returnCode = 0;
+            return 0;
         }
-        return returnCode;
+        return 1;
     }
 
     public int assignAccountBalance(String accountName, int amount) {
-        // assign the proper account balance
+        /**
+         * @Params {String(accountname), int(transactionAmount)}
+         * Set the balance for the requested account validating the
+         * instance location by the accountName.
+         * @Returns {int}
+         * accounts[index].setBalance returns 1 for fail, 0 for success
+         * On a request to a non existing account 1 is returned w/o
+         * message
+         */
 
-        if (accountName == "Checking") {
+        if (accountName.equals("Checking")) {
             return accounts[0].setBalance(amount);
-        } else if (accountName == "Savings") {
+        } else if (accountName.equals("Savings")) {
             return accounts[1].setBalance(amount);
         }
         return 1;
     }
 
-    public int assignSavingsBalance(int amount) {
-        return accounts[1].setBalance(amount);
-    }
-
     public int debitAccount(String accountName, int amount) {
-        // send the request to the proper account instance and return the
-        // result of the call
+        /**
+         * @Params {String(accountname), int(transactionAmount)}
+         * Debit the balance for the requested account validating the
+         * instance location by the accountName.
+         * @Returns {int}
+         * accounts[index].debit returns 1 for fail, 0 for success
+         * On a request to a non existing account 1 is returned w/o
+         * message
+         */
 
-        int returnCode = 0;
-        if (accountName == "Checking") {
-            returnCode = accounts[0].debit(amount);
-        } else if(accountName == "Savings"){
-            returnCode = accounts[1].debit(amount);
+        if (accountName.equals("Checking")) {
+            return accounts[0].debit(amount);
+        } else if(accountName.equals("Savings")) {
+            return accounts[1].debit(amount);
         }
-        return returnCode;
+        return 1;
     }
 
     public int creditAccont(String accountName, int amount) {
-        // process the transaction for the requested account
-        // return 1 for fail, 0 for success
+        /**
+         * @Params {String(accountname), int(transactionAmount)}
+         * Credit the balance for the requested account validating the
+         * instance location by the accountName.
+         * @Returns {int}
+         * accounts[index].credit returns 1 for fail, 0 for success
+         * On a request to a non existing account 1 is returned w/o
+         * message
+         */
 
-        int returnCode = 1;
-        if (accountName == "Checking") {
-            returnCode = accounts[0].credit(amount);
-        } else if (accountName == "Savings") {
-            returnCode = accounts[1].credit(amount);
+        if (accountName.equals("Checking")) {
+            return accounts[0].credit(amount);
+        } else if (accountName.equals("Savings")) {
+            return accounts[1].credit(amount);
         }
-        return  returnCode;
+        return  1;
     }
 
     public int getAccountBalance(String accountName) {
-        // get the balance for the account and return the  amount
-        // returns balance if found, -1 for fail(need to handle this later)
+        /**
+         * @Params {String(accountName)}
+         * Return  the balance for the provided name
+         * @Returns {int} account balance
+         * If account isn't found return -1
+         */
 
-        int balance = -1;
-        if (accountName == "Checking") {
-            balance = accounts[0].getBalance();
-        } else if (accountName == "Savings") {
-            balance = accounts[1].getBalance();
+        if (accountName.equals("Checking")) {
+            return accounts[0].getBalance();
+        } else if (accountName.equals("Savings")) {
+            return accounts[1].getBalance();
         }
-        return balance;
+        return -1;
     }
 
 }
