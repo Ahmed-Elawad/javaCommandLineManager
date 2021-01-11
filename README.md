@@ -1,5 +1,5 @@
 <div>
-  <h1>Java Command Line Manager</h1>
+  <h1>CLI Workflow interface</h1>
 </div>
 <img src="https://img.shields.io/github/languages/top/Ahmed-Elawad/CLI-Wrkflow" />
 
