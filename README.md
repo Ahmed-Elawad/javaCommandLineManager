@@ -4,7 +4,7 @@
 <img src="https://img.shields.io/github/languages/top/Ahmed-Elawad/javaCommandLineManager" />
 
 ## Usage
-A command demo program for basic interactions with
+Currently in demo stage for CLI usage and fs interaction
 - [ ] A user login
 - [ ] Transactable accounts
 
