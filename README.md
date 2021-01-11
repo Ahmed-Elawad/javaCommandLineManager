@@ -1,7 +1,7 @@
 <div>
   <h1>Java Command Line Manager</h1>
 </div>
-<img src="https://img.shields.io/github/languages/top/Ahmed-Elawad/javaCommandLineManager" />
+<img src="https://img.shields.io/github/languages/top/Ahmed-Elawad/CLI-Wrkflow" />
 
 ## Usage
 Currently in demo stage for CLI usage and fs interaction
